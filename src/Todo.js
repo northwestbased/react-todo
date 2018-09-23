@@ -11,7 +11,7 @@ class Todo extends Component {
 	  type="checkbox" 
 	  checked={this.props.todoState.completed}
         />
-        <span 
+  <span 
 	  className={"title " + (this.props.todoState.completed ? "completed" : "")}
 	  onDoubleClick={this.props.beginEditing}
 	  contentEditable={(this.props.todoState.isEditing ? 'true' : '')}
