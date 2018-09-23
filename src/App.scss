@@ -1,0 +1,47 @@
+.App {
+	width:500px;
+	max-width:100%;
+	margin:auto;
+	border:1px solid gray;
+
+	header {
+		h1 {
+			text-align:center;
+		}
+		input {
+			box-sizing:border-box;
+			width:100%;
+		}
+	}
+	.todo {
+		border-top:1px solid gray;
+		border-bottom:1px solid gray;
+		padding:4px;
+		display:flex;
+		.x {
+			margin-left:auto;
+			font-weight:bold;
+		}
+	}
+	footer {
+		border-top:1px solid black;
+		padding:5px;
+		display:flex;
+		justify-content:space-around;
+		span {
+			padding:3px;
+		}
+		&.all > span:first-child {
+			border:1px solid gray;
+			border-radius:3;
+		}
+		&.active > span:nth-child(2) {
+			border:1px solid gray;
+			border-radius:3;
+		}
+		&.completed > span:nth-child(3) {
+			border:1px solid gray;
+			border-radius:3;
+		}
+	}
+}

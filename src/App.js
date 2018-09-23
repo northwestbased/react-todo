@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Todo from './Todo.js'
-import './App.css';
+import './App.scss';
 
 class App extends Component {
 
@@ -16,6 +16,7 @@ class App extends Component {
     this.beginEditing = this.beginEditing.bind(this)
     this.updateTitle = this.updateTitle.bind(this)
     this.clearCompleted = this.clearCompleted.bind(this)
+    this.renderTodos = this.renderTodos.bind(this)
   }
 
 
@@ -73,7 +74,10 @@ class App extends Component {
     this.setState({todos:todos})
   }
 
-  render() {
+  renderTodos() {
+    if (this.state.todos.length == 0)
+	  return
+
     let filteredTodos = []
     switch(this.state.filter) {
       case "all":
@@ -89,13 +93,10 @@ class App extends Component {
           todo.completed ? false : true
         )
     }
+
     return (
-      <div className="App">
-        <header>
-	    <h1>Todo MVC</h1>
-        </header>
+      <div>
 	<div className="todos">
-	    <input type="text" onKeyPress={this.createNewTodo} />
 	    {
 		filteredTodos.map( (todoState, key) => 
 			<Todo 
@@ -110,13 +111,35 @@ class App extends Component {
 
 	    }
         </div>
-        <footer>
-	  <span onClick={() => this.setState({filter : "all"})}>All</span> - 
-          <span onClick={() => this.setState({filter : "active"})}>Active</span> - 
-          <span onClick={() => this.setState({filter :"completed"})}>Completed</span> -
+        <footer className={this.state.filter}>
+	  <span onClick={() => this.setState({filter : "all"})}>All</span>
+          <span onClick={() => this.setState({filter : "active"})}>Active</span>
+          <span onClick={() => this.setState({filter :"completed"})}>Completed</span>
           <span onClick={this.clearCompleted}>Clear Completed</span>
         </footer>
+      </div>
+    )
 
+
+
+  }
+
+  render() {
+    
+
+    return (
+      <div className="App">
+        <header>
+	    <h1>Todo MVC</h1>
+	    <input 
+	      type="text" 
+	      className="todoInput"
+	      placeholder="What needs to be done?"
+	      onKeyPress={this.createNewTodo} 
+	    />
+	      
+        </header>
+	{this.renderTodos()}
       </div>
     );
   }

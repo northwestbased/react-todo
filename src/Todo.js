@@ -6,7 +6,11 @@ class Todo extends Component {
   render() {
     return (
       <div className="todo"> 
-	<span onClick={this.props.toggleCompleted}>C</span> - 
+	<input 
+	  onChange={this.props.toggleCompleted} 
+	  type="checkbox" 
+	  checked={this.props.todoState.completed}
+        />
         <span 
 	  className={"title " + (this.props.todoState.completed ? "completed" : "")}
 	  onDoubleClick={this.props.beginEditing}
@@ -15,7 +19,7 @@ class Todo extends Component {
 	>
 	  {this.props.todoState.title}
 	</span>
-        - <span onClick={this.props.deleteTodo}>D</span>
+        <button class="x" onClick={this.props.deleteTodo}>X</button>
       </div>
     )
   }
