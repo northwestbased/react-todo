@@ -31,6 +31,7 @@ class App extends Component {
       
       todos.push(newTodo)
       this.setState({todos:todos})
+      e.target.value = ""
     }
   }
 
@@ -117,10 +118,11 @@ class App extends Component {
 	    }
         </div>
         <footer className={this.state.filter}>
-	  <span onClick={() => this.setState({filter : "all"})}>All</span>
-          <span onClick={() => this.setState({filter : "active"})}>Active</span>
-          <span onClick={() => this.setState({filter :"completed"})}>Completed</span>
-          <span onClick={this.clearCompleted}>Clear Completed</span>
+	  <div onClick={() => this.setState({filter : "all"})}>All</div>
+          <div onClick={() => this.setState({filter : "active"})}>Active</div>
+          <div onClick={() => this.setState({filter :"completed"})}>Completed</div>
+          <div onClick={this.clearCompleted}>Clear Completed</div>
+          <div>{activeTodos.length} left</div>
         </footer>
       </div>
     )

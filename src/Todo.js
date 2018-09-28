@@ -1,4 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTimesCircle } from '@fortawesome/free-regular-svg-icons'
+
 
 
 class Todo extends Component {
@@ -19,7 +22,7 @@ class Todo extends Component {
 	>
 	  {this.props.todoState.title}
 	</span>
-        <button class="x" onClick={this.props.deleteTodo}>X</button>
+        <button className="x" onClick={this.props.deleteTodo}><FontAwesomeIcon icon={faTimesCircle} /></button>
       </div>
     )
   }
