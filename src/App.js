@@ -8,7 +8,7 @@ class App extends Component {
     super()
     this.state = {
       todos: [],
-      filter:'all'
+      filter:'all',
     }
     this.createNewTodo = this.createNewTodo.bind(this)
     this.toggleCompleted = this.toggleCompleted.bind(this)
@@ -78,30 +78,35 @@ class App extends Component {
     if (this.state.todos.length == 0)
 	  return
 
-    let filteredTodos = []
-    switch(this.state.filter) {
-      case "all":
-        filteredTodos = this.state.todos
-        break;
-      case "completed":
-        filteredTodos = this.state.todos.filter( todo =>
-          todo.completed ? true : false
-        )
-        break;
-      case "active":
-        filteredTodos = this.state.todos.filter( todo =>
-          todo.completed ? false : true
-        )
+    let completedTodos = []
+    let activeTodos = []
+    let allTodos = []
+    this.state.todos.forEach( (todo, index) => {
+      if (todo.completed) {
+        completedTodos.push(index)
+      } else {
+        activeTodos.push(index)
+      }
+      allTodos.push(index)
+    }
+    )
+    
+    if (this.state.filter == "completed") {
+      var filteredTodos = completedTodos
+    } else if (this.state.filter == "active") {
+      var filteredTodos = activeTodos
+    } else {
+      var filteredTodos = allTodos
     }
 
     return (
       <div>
 	<div className="todos">
 	    {
-		filteredTodos.map( (todoState, key) => 
+		filteredTodos.map(key => 
 			<Todo 
 			  key={key}
-			  todoState={todoState} 
+			  todoState={this.state.todos[key]} 
 			  deleteTodo={() => this.deleteTodo(key)} 
 			  toggleCompleted={() => this.toggleCompleted(key)} 
 			  beginEditing={() => this.beginEditing(key)} 
