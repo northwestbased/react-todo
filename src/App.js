@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Todo from './Todo.js'
 import './App.scss';
 
+const LOCALSTORAGEKEY = "savedState"
+
 class App extends Component {
 
   constructor() {
@@ -9,6 +11,12 @@ class App extends Component {
     this.state = {
       todos: [],
       filter:'all',
+    }
+
+    let newState = localStorage.getItem(LOCALSTORAGEKEY)
+    if (newState !== null) {
+        newState = JSON.parse(newState)
+	this.state = newState
     }
     this.createNewTodo = this.createNewTodo.bind(this)
     this.toggleCompleted = this.toggleCompleted.bind(this)
@@ -126,13 +134,11 @@ class App extends Component {
         </footer>
       </div>
     )
-
-
-
   }
 
   render() {
-    
+    //save in localstorage. this probably isn't the best place to call this, but works for now.
+    localStorage.setItem(LOCALSTORAGEKEY, JSON.stringify(this.state))
 
     return (
       <div className="App">
@@ -150,6 +156,7 @@ class App extends Component {
       </div>
     );
   }
+  
 }
 
 export default App;
