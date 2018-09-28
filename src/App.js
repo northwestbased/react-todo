@@ -76,7 +76,7 @@ class App extends Component {
   }
 
   renderTodos() {
-    if (this.state.todos.length == 0)
+    if (this.state.todos.length === 0)
 	  return
 
     let completedTodos = []
@@ -92,12 +92,12 @@ class App extends Component {
     }
     )
     
-    if (this.state.filter == "completed") {
+    if (this.state.filter === "completed") {
       var filteredTodos = completedTodos
-    } else if (this.state.filter == "active") {
-      var filteredTodos = activeTodos
+    } else if (this.state.filter === "active") {
+      filteredTodos = activeTodos
     } else {
-      var filteredTodos = allTodos
+      filteredTodos = allTodos
     }
 
     return (
