@@ -25,16 +25,20 @@ class App extends Component {
     this.updateTitle = this.updateTitle.bind(this)
     this.clearCompleted = this.clearCompleted.bind(this)
     this.renderTodos = this.renderTodos.bind(this)
+    this.componendDidUpdate = this.componentDidUpdate.bind(this)
   }
 
 
   createNewTodo(e) {
     if (e.key === 'Enter') {
+      let value = e.target.value.trim()
+      if (value.length === 0) return
+
       let todos = this.state.todos
       let newTodo = {
-        title: e.target.value,
-	completed: false,
-	isEditing: false
+        title: value,
+        completed: false,
+	      isEditing: false
       }
       
       todos.push(newTodo)
@@ -135,11 +139,11 @@ class App extends Component {
       </div>
     )
   }
+  componentDidUpdate() {
+    localStorage.setItem(LOCALSTORAGEKEY, JSON.stringify(this.state))
+  }
 
   render() {
-    //save in localstorage. this probably isn't the best place to call this, but works for now.
-    localStorage.setItem(LOCALSTORAGEKEY, JSON.stringify(this.state))
-
     return (
       <div className="App">
         <header>
