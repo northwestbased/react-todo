@@ -147,7 +147,7 @@ class App extends Component {
     return (
       <div className="App">
         <header>
-	    <h1>Todo MVC</h1>
+	    <h1>Todo List</h1>
 	    <input 
 	      type="text" 
 	      className="todoInput"
